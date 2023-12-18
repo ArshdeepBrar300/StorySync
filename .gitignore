@@ -24,3 +24,4 @@ megablog/.env
 *.njsproj
 *.sln
 *.sw?
+.env
