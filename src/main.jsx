@@ -24,7 +24,10 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Login />,
+        element:
+          <AuthLayout authentication={false}>
+            <Home />,
+          </AuthLayout>
       },
       {
         path: "/login",

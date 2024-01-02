@@ -1,24 +1,43 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { login as authLogin } from '../store/authSlice'
 import { Button, Input, Logo } from "./index"
 import { useDispatch } from "react-redux"
 import authService from "../appwrite/auth"
+import { logout } from '../store/authSlice'
+import { CorsRequest } from 'cors'
 import { useForm } from "react-hook-form"
 import Loader from './Loader'
 
 function Login() {
+
+    // useEffect(() => {
+    //     authService.getCurrentUser()
+    //         .then((userData) => {
+    //             if (userData) {
+    //                 dispatch(login({ userData }))
+    //             } else {
+    //                 dispatch(logout())
+    //             }
+    //         })
+    //         .finally(() => setLoading(false))
+    // }, [])
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const { register, handleSubmit } = useForm()
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(false);
 
+
     const login = async (data) => {
         setError("")
         setLoading(true);
 
         try {
+
+
+
+            // app.use(CorsRequest())
             const session = await authService.login(data)
             if (session) {
                 const userData = await authService.getCurrentUser()
@@ -38,7 +57,7 @@ function Login() {
         loading ? <Loader /> : <div
             className='flex items-center justify-center my-8 mx-auto  '
         >
-            <div className={`mx-auto w-2/5 max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}>
+            <div className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}>
                 <div className="mb-2 flex justify-center">
                     <span className="inline-block w-full max-w-[100px]">
                         <Logo height='100px' />
