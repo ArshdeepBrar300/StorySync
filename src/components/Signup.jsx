@@ -28,7 +28,8 @@ function Signup() {
                 navigate("/all-posts")
             }
         } catch (error) {
-            console.log('userData')
+           
+            setLoading(false)
             setError(error.message)
         }
     }
